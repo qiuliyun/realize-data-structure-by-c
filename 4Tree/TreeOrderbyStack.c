@@ -96,6 +96,29 @@ void inOrder2(Bitree *T){
     }
 }
 
+//先序遍历非递归算法
+//若根不为空，访问当前根节点，并入栈，然后一直向左孩子走
+//若根节点为空，出栈，并转向出栈元素的右孩子
+//循环以上过程
+void preOrder2(Bitree *T){
+    Bitree *p = T;
+    sqStack s;
+    initStack(&s);
+    while(p || s.top != -1){    //栈不空或者当前子树根节点不空
+        if(p){
+            printf("[%d]  ",p->data);   //访问当前子树根节点
+            push(&s,*p);    
+            p = p->lchild;  //p进栈，向左孩子走
+        }else{
+            p = pop(&s);
+            p = p->rchild;
+        }
+        
+
+
+    }
+}
+
 int main(){
     void initStack(sqStack *s);
     int push(sqStack *s,Bitree b);
@@ -104,6 +127,6 @@ int main(){
     void inOrder2(Bitree *T);
 
     Bitree *t = inittree();
-    inOrder2(t);
+    preOrder2(t);
     return 0;
 }
